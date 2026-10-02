@@ -1,0 +1,18 @@
+name: NexusProxySync
+version: '${project.version}'
+main: com.fivemcodehub.nexus.NexusPlugin
+api-version: '1.20'
+authors: [vndel]
+description: Redis Pub/Sub message bus between Velocity and Paper backends
+website: https://team.fivemcodehub.com
+
+commands:
+  nexus:
+    description: Bus diagnostics and cross-server messaging
+    usage: /nexus <status|broadcast|send> [args]
+    permission: nexus.admin
+
+permissions:
+  nexus.admin:
+    description: Administrative access
+    default: op
