@@ -1,0 +1,29 @@
+# ───────────────────────────────────────────────────────────────
+#  NexusProxySync
+#
+#  Redis Pub/Sub bus between Paper backends behind Velocity.
+#  Pub/Sub is not durable: messages published while a node is down
+#  are gone. Do not route anything that must survive a restart.
+# ───────────────────────────────────────────────────────────────
+
+# Unique per backend. Must match the name used in velocity.toml so
+# log lines correlate across the network. The plugin refuses to
+# start if this is blank.
+server-id: 'lobby-01'
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: ''
+  timeout-ms: 2000
+  pool-size: 6
+
+# Messages older than this are discarded. Protects against a backlog
+# being replayed all at once after a reconnect.
+max-message-age-ms: 30000
+
+# Publish join/quit events onto the bus.
+publish-presence: true
+
+# Log inbound switch events. Noisy on a busy network.
+announce-switches: false
